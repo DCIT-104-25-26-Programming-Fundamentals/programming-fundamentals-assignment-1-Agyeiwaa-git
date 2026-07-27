@@ -61,3 +61,71 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+
+
+rows = int(input("Enter number of rows: "))
+columns = int(input("Enter number of columns: "))
+
+matrix = []
+for row_number in range(rows):
+    row = list(map(int, input(f"Enter row {row_number + 1}: ").split()))
+    matrix.append(row)
+
+def display_matrix(matrix):
+    for row in matrix:
+        for value in row:
+          print(value, end=" ")
+        print()
+
+def transpose_matrix(matrix):
+    transpose = []
+  
+    for column in range(len(matrix[0])):
+        new_row = []
+
+        for row in range(len(matrix)):
+            new_row.append(matrix[row][column])
+        transpose.append(new_row)
+
+    return transpose
+
+
+print("Original Matrix:")
+display_matrix(matrix)
+
+transpose = transpose_matrix(matrix)
+
+print("Transpose Matrix:")
+display_matrix(transpose)
+
+
+def add_matrices(matrix1, matrix2):
+  result = []
+
+  for row in range(len(matrix1)):
+    new_row = []
+
+    for column in range(len(matrix1[0])):
+        new_row.append(matrix1[row][column] + matrix2[row][column])
+
+    result.append(new_row)
+
+
+  return result
+
+
+def multiply_matrices(matrix1,matrix2):
+    result = []
+
+    for row in range(len(matrix1)):
+        new_row = []
+    
+        for column in range(len(matrix2[0])):
+            total = 0 
+
+            for k in range(len(matrix1[0])):
+                total += matrix1[row][k] * matrix2[k][column]
+
+          new_row.append(total)
+      result.append(new_row)
+    return result 
