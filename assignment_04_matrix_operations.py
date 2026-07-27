@@ -63,69 +63,132 @@
 
 
 
-rows = int(input("Enter number of rows: "))
-columns = int(input("Enter number of columns: "))
-
-matrix = []
-for row_number in range(rows):
-    row = list(map(int, input(f"Enter row {row_number + 1}: ").split()))
-    matrix.append(row)
 
 def display_matrix(matrix):
     for row in matrix:
         for value in row:
-          print(value, end=" ")
+            print(value, end=" ")
         print()
+
 
 def transpose_matrix(matrix):
     transpose = []
-  
+
     for column in range(len(matrix[0])):
         new_row = []
 
         for row in range(len(matrix)):
             new_row.append(matrix[row][column])
+
         transpose.append(new_row)
 
     return transpose
 
+
+def add_matrices(matrix1, matrix2):
+    result = []
+
+    for row in range(len(matrix1)):
+        new_row = []
+
+        for column in range(len(matrix1[0])):
+            new_row.append(matrix1[row][column] + matrix2[row][column])
+
+        result.append(new_row)
+
+    return result
+
+
+def multiply_matrices(matrix1, matrix2):
+    result = []
+
+    for row in range(len(matrix1)):
+        new_row = []
+
+        for column in range(len(matrix2[0])):
+            total = 0
+
+            for k in range(len(matrix1[0])):
+                total += matrix1[row][k] * matrix2[k][column]
+
+            new_row.append(total)
+
+        result.append(new_row)
+
+    return result
+
+
+print("PART A - Transpose Matrix")
+
+rows = int(input("Enter number of rows: "))
+columns = int(input("Enter number of columns: "))
+
+matrix = []
+
+for row_number in range(rows):
+    row = list(map(int, input(f"Enter row {row_number + 1}: ").split()))
+    matrix.append(row)
 
 print("Original Matrix:")
 display_matrix(matrix)
 
 transpose = transpose_matrix(matrix)
 
-print("Transpose Matrix:")
+print("Transposed Matrix:")
 display_matrix(transpose)
 
 
-def add_matrices(matrix1, matrix2):
-  result = []
+print("PART B - Add Two Matrices")
 
-  for row in range(len(matrix1)):
-    new_row = []
+rows = int(input("Enter number of rows: "))
+columns = int(input("Enter number of columns: "))
 
-    for column in range(len(matrix1[0])):
-        new_row.append(matrix1[row][column] + matrix2[row][column])
+print("Enter Matrix 1:")
 
-    result.append(new_row)
+matrix1 = []
+
+for row_number in range(rows):
+    row = list(map(int, input(f"Enter row {row_number + 1}: ").split()))
+    matrix1.append(row)
+
+print("Enter Matrix 2:")
+
+matrix2 = []
+
+for row_number in range(rows):
+    row = list(map(int, input(f"Enter row {row_number + 1}: ").split()))
+    matrix2.append(row)
+
+sum_matrix = add_matrices(matrix1, matrix2)
+
+print("Sum of the matrices:")
+display_matrix(sum_matrix)
 
 
-  return result
+print("PART C - Multiply Two Matrices")
 
+rows_A = int(input("Enter number of rows for Matrix A: "))
+columns_A = int(input("Enter number of columns for Matrix A: "))
 
-def multiply_matrices(matrix1,matrix2):
-    result = []
+matrixA = []
 
-    for row in range(len(matrix1)):
-        new_row = []
-    
-        for column in range(len(matrix2[0])):
-            total = 0 
+for row_number in range(rows_A):
+    row = list(map(int, input(f"Enter row {row_number + 1}: ").split()))
+    matrixA.append(row)
 
-            for k in range(len(matrix1[0])):
-                total += matrix1[row][k] * matrix2[k][column]
+rows_B = int(input("Enter number of rows for Matrix B: "))
+columns_B = int(input("Enter number of columns for Matrix B: "))
 
-          new_row.append(total)
-      result.append(new_row)
-    return result 
+if columns_A != rows_B:
+    print("Matrix multiplication is not possible.")
+else:
+    matrixB = []
+
+    for row_number in range(rows_B):
+        row = list(map(int, input(f"Enter row {row_number + 1}: ").split()))
+        matrixB.append(row)
+
+    product = multiply_matrices(matrixA, matrixB)
+
+    print("Product Matrix:")
+    display_matrix(product)
